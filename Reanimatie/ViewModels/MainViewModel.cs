@@ -81,7 +81,7 @@ namespace Reanimatie.ViewModels
         }
 
         private void ExecuteStartCommand()
-        {          
+        {            
             _dispatcherTimer.Start();
         }
 

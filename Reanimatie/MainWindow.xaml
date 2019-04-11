@@ -8,7 +8,7 @@
 
     <dx:DXWindow.Resources>
         
-        <Storyboard x:Key="ReanimatieStoryBoard" RepeatBehavior="Forever" TargetName="CPRImage">
+        <Storyboard x:Name="ReanimatieStoryBoard" x:Key="ReanimatieStoryBoardId" RepeatBehavior="Forever" TargetName="CPRImage">
             <ObjectAnimationUsingKeyFrames Duration="0:0:1" Storyboard.TargetProperty="Source" RepeatBehavior="Forever">
                 <DiscreteObjectKeyFrame KeyTime="0">
                     <DiscreteObjectKeyFrame.Value>
@@ -46,8 +46,7 @@
                 </EventTrigger>
             </Image.Triggers>
         </Image>-->
-
-        <Image x:Name="CPRImage" Source="Images/Start.png" Width="100" Height="100" Grid.Row="0" Grid.Column="0" />
+      
 
         <Button Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Content="Start" Command="{Binding StartCommand}">
             <Button.Triggers>
