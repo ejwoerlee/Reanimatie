@@ -35,6 +35,7 @@ namespace Reanimatie.ViewModels
 
         private string _txtBlue = string.Empty;
         private string _txtRed = "PUSH!";
+        private DateTime _startTime;
 
         private SolidColorBrush _color = new SolidColorBrush(Colors.Blue);
         public SolidColorBrush CanvasColor
@@ -81,7 +82,8 @@ namespace Reanimatie.ViewModels
         }
 
         private void ExecuteStartCommand()
-        {            
+        {
+            _startTime = DateTime.Now;
             _dispatcherTimer.Start();
         }
 
@@ -89,7 +91,11 @@ namespace Reanimatie.ViewModels
         {
             CanvasColor = CanvasColor.Color == _colorBlue.Color ? _colorRed : _colorBlue;
             TextColor = TextColor == _txtBlue ? _txtRed : _txtBlue;
-            TimerLabelText = DateTime.Now.ToString("ss.fff");
+
+            DateTime thisTime = DateTime.Now;
+            TimeSpan span = thisTime.Subtract(_startTime);
+
+            TimerLabelText = span.Milliseconds.ToString();
         }
 
         // There are many situations where you would need something in your application to occur at a given interval, and using the DispatcherTimer,
