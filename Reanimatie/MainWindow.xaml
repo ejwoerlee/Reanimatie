@@ -7,9 +7,10 @@
         Title="CPR" Height="300" Width="300" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
 
     <dx:DXWindow.Resources>
+        
         <Storyboard x:Key="ReanimatieStoryBoard" RepeatBehavior="Forever" TargetName="CPRImage">
             <ObjectAnimationUsingKeyFrames Duration="0:0:1" Storyboard.TargetProperty="Source" RepeatBehavior="Forever">
-                <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                <DiscreteObjectKeyFrame KeyTime="0">
                     <DiscreteObjectKeyFrame.Value>
                         <BitmapImage UriSource="Images/Start.png"/>
                     </DiscreteObjectKeyFrame.Value>
@@ -21,6 +22,7 @@
                 </DiscreteObjectKeyFrame>
             </ObjectAnimationUsingKeyFrames>
         </Storyboard>
+
     </dx:DXWindow.Resources>
     <dx:DXWindow.DataContext>
         <ViewModels:MainViewModel/>
@@ -55,8 +57,11 @@
             </Button.Triggers>
         </Button>
         
-        <Canvas Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Height="100" Width="100" Background="{Binding CanvasColor, Mode=TwoWay}" />
-        <Label Grid.Column ="1" Grid.Row="0" Content="{Binding TextColor, Mode=TwoWay}" FontSize="14" ></Label> 
+        <Rectangle Grid.Column="0" Grid.Row="1"  Fill="{Binding CanvasColor}" Height="100" Width="100" Stroke="Black"/>
+        <StackPanel Grid.Column ="1" Grid.Row="1">
+            <Label  Content="{Binding TextColor, Mode=TwoWay}" FontSize="14" ></Label>
+            <Label  Content="{Binding TimerLabelText, Mode=TwoWay}" FontSize="14" />
+        </StackPanel>
 
     </Grid>
 </dx:DXWindow>

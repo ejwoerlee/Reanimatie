@@ -7,6 +7,7 @@ namespace Reanimatie.ViewModels
     using System.Net.Mime;
     using System.Security.AccessControl;
     using System.Threading;
+    using System.Windows;
     using System.Windows.Input;
     using System.Windows.Media;
     using DevExpress.Utils.Commands;
@@ -58,7 +59,17 @@ namespace Reanimatie.ViewModels
             }
         }
 
+        private string _timerLabelText = string.Empty;
 
+        public string TimerLabelText
+        {
+            get { return _timerLabelText; }
+            set
+            {
+                _timerLabelText = value;
+                RaisePropertiesChanged(nameof(TimerLabelText));
+            }
+        }
 
         public ICommand StartCommand { get; set; }
 
@@ -76,30 +87,19 @@ namespace Reanimatie.ViewModels
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            //if (CanvasColor.Color == _colorBlue.Color)
-            //{
-            //    CanvasColor = _colorRed;
-            //    return;
-            //}
-
-            //if (CanvasColor.Color == _colorRed.Color)
-            //{
-            //    CanvasColor = _colorBlue;
-            //    return;
-            //}
-
-            if (TextColor == _txtBlue)
-            {
-                TextColor = _txtRed;
-                return;
-            }
-
-            if (TextColor == _txtRed)
-            {
-                TextColor = _txtBlue;
-                return;
-            }
+            CanvasColor = CanvasColor.Color == _colorBlue.Color ? _colorRed : _colorBlue;
+            TextColor = TextColor == _txtBlue ? _txtRed : _txtBlue;
+            TimerLabelText = DateTime.Now.ToString("ss.fff");
         }
+
+        // There are many situations where you would need something in your application to occur at a given interval, and using the DispatcherTimer,
+        // it's quite easy to accomplish. Just be aware that if you do something complicated in your Tick event, it shouldn't run too often, like
+        // in the last example where the timer ticks each millisecond - that will put a heavy strain on the computer running your application.
+        
+        // Also be aware that the DispatcherTimer is not 100% precise in all situations. The tick operations are placed on the Dispatcher queue,
+        // so if the computer is under a lot of pressure, your operation might be delayed.The.NET framework promises that the Tick event will
+        // never occur too early, but can't promise that it won't be slightly delayed. However, for most use cases,
+        // the DispatcherTimer is more than precise enough.
 
     }
 
